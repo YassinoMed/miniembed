@@ -1,0 +1,51 @@
+name: Sync to Hugging Face Hub
+
+on:
+  push:
+    branches: [huggingface-branch]
+
+  # Allow manual trigger from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  sync-to-hub:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: pip install huggingface_hub
+
+      - name: Push to Hugging Face
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          python -c "
+          from huggingface_hub import HfApi
+          import os
+
+          # Initialize API
+          api = HfApi(token=os.environ['HF_TOKEN'])
+          
+          repo_id = 'surazbhandari/miniembed'
+          
+          print(f'Syncing huggingface-branch to {repo_id}...')
+          
+          # Upload the current directory to the HF repo.
+          # upload_folder handles LFS automatically.
+          api.upload_folder(
+              folder_path='.',
+              repo_id=repo_id,
+              repo_type='model',
+              commit_message='Sync from GitHub Actions',
+              ignore_patterns=['.github*', '.git*']
+          )
+          "

@@ -1,0 +1,10 @@
+{
+  "epochs": 10,
+  "total_steps": 149130,
+  "final_loss": 0.07483314797282219,
+  "training_samples": 3817707,
+  "batch_size": 256,
+  "learning_rate": 0.0002,
+  "date": "2026-02-13 22:53:59",
+  "training_time_minutes": 2940.0035917321843
+}

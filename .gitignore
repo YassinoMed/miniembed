@@ -1,0 +1,87 @@
+# =============================================================================
+# MiniEmbed .gitignore
+# =============================================================================
+
+# ── Python ──
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+*.egg
+.installed.cfg
+dist/
+build/
+develop-eggs/
+eggs/
+.eggs/
+sdist/
+wheels/
+*.manifest
+*.spec
+
+# ── Testing & Coverage ──
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+.hypothesis/
+.pytest_cache/
+nosetests.xml
+coverage.xml
+*.cover
+
+# ── Environments ──
+.env
+.venv
+env/
+venv/
+ENV/
+
+# ── IDE ──
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# ── OS ──
+.DS_Store
+Thumbs.db
+
+# ── Jupyter ──
+.ipynb_checkpoints
+
+# =============================================================================
+# PROJECT SPECIFIC: Private / Training Files
+# =============================================================================
+
+# Training scripts (not needed for inference)
+train.py
+train_ui.py
+
+# Training checkpoints
+checkpoints/
+
+# Streamlit config (local dev only)
+.streamlit/
+
+# Research notes (private)
+research.md
+
+# ── Data: Exclude everything except the sample file ──
+data/*
+!data/sample_data.jsonl
+
+# ── Models: Exclude all model weights (too large for git) ──
+# Users should download weights separately or train their own.
+# We keep config.json, tokenizer.json, and training_info.json for reference.
+models/*/model.pt
+models/*/model.safetensors
+
+# ── Misc large files ──
+*.bin
+*.pth
+*.onnx
+*.gz
